@@ -21,3 +21,22 @@ docker run -v /usr/home/m-prj:/usr/share/nginx/html -p8080:80 -d nginx
 
 проверим, перейдя на порт 8080 и увидим нашу страницу
 
+длинные команды для читабельности желательно разбивать на несколько строк
+'''
+docker run -v \
+--name my-nginx \
+/usr/home/m-prj:/usr/share/nginx/html \
+-p8080:80 \
+-d \
+nginx
+'''
+
+Чтобы посмотреть привязку папок используем уже известную нам команду
+'''
+docker container inspect my-nginx
+'''
+Открываем секцию Mounts, которая отображает привязку папок
+Source - папка на хосте
+Destination - папка в контейнере
+
+
