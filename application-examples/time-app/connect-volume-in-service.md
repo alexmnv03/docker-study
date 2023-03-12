@@ -34,4 +34,22 @@ volumes:
 изменения в файл mysqlPool.mjs
 Теперь мы читаем их из переменных среды или установим дофолтное значение
 
+но чтобы это заработало, нам необходимо прописать их в нашем compose
+для api
+'''
+environment:
+MYSQL_HOST: mysql
+MYSQL_USER: root
+MYSQL_PORT: '3306'
+MYSQL_PASSWORD: password
+MYSQL_DB: time_db
+'''
+для mysql
+'''
+environment:
+MYSQL_ROOT_PASSWORD: password
+MYSQL_DATABASE: time_db
+'''
+
+Теперь перезапустим все сервисы
 
