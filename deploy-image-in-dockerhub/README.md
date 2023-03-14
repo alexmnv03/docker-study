@@ -39,3 +39,8 @@ docker-compose
 '''
 docker-compose -f docker-compose.pub.yml up -d
 '''
+
+Для остановки сервисов тоже необходимо указывать имя файла
+'''
+docker-compose -f docker-compose.pub.yml down
+'''
