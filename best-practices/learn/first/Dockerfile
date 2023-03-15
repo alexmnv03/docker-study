@@ -1,6 +1,6 @@
 FROM debian
 
-COPY .. /opt
+COPY ../.. /opt
 
 RUN apt-get update
 RUN apt-get install -y nginx

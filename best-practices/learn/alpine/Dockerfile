@@ -1,6 +1,6 @@
 FROM alpine:3.11.5
 
-COPY .. /opt
+COPY ../.. /opt
 
 RUN apk add --no-cache nginx && mkdir -p /run/nginx
     && rm -rf /var/lib/apt/lists/*
