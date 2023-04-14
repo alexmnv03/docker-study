@@ -6,11 +6,12 @@ stages:
   - push
   - deploy
 
+# сбилдим проект
 build:
   stage: build
   script:
     - docker build -t $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_REF_SLUG.$CI_PIPELINE_ID .
-
+# проверим, что сборка запускается
 test:
   stage: test
   image:
@@ -23,7 +24,8 @@ test:
         --abort-on-container-exit
         --exit-code-from app
         --quiet-pull
-
+# остановим тестовую сборку, выполняется всегда (always), не зависимо от предыудщих,
+# обычно если джоба завершилась неудачей, то следующие не будут запущены
 cleanup:
   stage: cleanup
   image:
@@ -32,7 +34,10 @@ cleanup:
   script:
     - docker-compose -p "$CI_PROJECT_NAME"_"$CI_PIPELINE_ID" down
   when: always
-
+# иногда делают билд и пуш в одной джобе, но тут мы его вынесли в отдельную джобу
+# Сначала мы логинимся в REGISTRY, а затем пушим с помощью CI_BUILD_TOKEN, который генерится для
+# конкретной джобы, т.е. после завершения джобы он становится не валидным
+# и только для ветки мастер
 push:
   stage: push
   before_script:
@@ -41,7 +46,10 @@ push:
     - docker push $CI_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME:$CI_COMMIT_REF_SLUG.$CI_PIPELINE_ID
   only:
     - master
-
+# и сам деплой, это одни из распространенных методов
+# сначала выполним предварительные щаги
+# лучше вынести секретные переменные типа DB_PASSWORD в gitLab variables
+# SECRET_KEY_BASE не надо менять
 deploy:
   stage: deploy
   before_script:
