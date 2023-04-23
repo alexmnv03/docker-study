@@ -14,3 +14,33 @@ docker run -d -cpus=1 lowmem150
 Т.е. демон собирает образы, управляет сетью логированием и др.
 Runc - собирает уже контейнеры
 
+## ContqinerD
+Запускать контейнеры в ручную не очень удобно. Но что делать если нет докера.
+Тут нам поможет ContqinerD, многие его уже используют заместо докера. Например, в последних 
+версия кубернайте уже не включают докер и там многие используют именно ContqinerD
+
+Ctr - утилита, которая управляет ContqinerD
+Старт контейнера, но надо учесть, что тут run это аналог docker start, т.к. у него run сразу же 
+пуллит контейнер
+'''
+Ctr run -d docker.io/library/name:tag name
+'''
+
+А это аналог docker pull
+'''
+Ctr image pull
+'''
+
+Запусим наш nginx используя ContqinerD
+
+'''
+Ctr pull docker.io/library/nginx:latest
+Ctr run -d docker.io/library/nginx:latest ctrnginx
+'''
+
+Зайдем внутрь контейнера
+
+'''
+Ctr task exec -exec-id 1007 ctrnginx curl 127.0.0.1
+'''
+
