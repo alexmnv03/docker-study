@@ -13,6 +13,8 @@ docker image tag ab80353456342 my-app:1.1
 docker image tag ab80353456342 registry-host:5000/myname/my-app:1.1
 '''
 Если мы хотим отправить образ на хранение в репозиторий, то запушим
+> Но перед пушем желательно залогиниться в наш registry
+
 '''
 docker image push registry-host:5000/myname/my-app:1.1
 '''
@@ -39,3 +41,7 @@ docker push localhost:5000/app:1.1
 '''
 docker rm -f registry
 '''
+
+>Docker push не работает без Docker login, сначала надо залогиниться
+
+> Без тэга образ нельзя запушить в registry
