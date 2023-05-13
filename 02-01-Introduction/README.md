@@ -29,7 +29,7 @@ Docker состоит из следующих компонентов:
  - Docker registry
 
 На этой схеме видно как они взаиможействуют между собой
-[Docker component](https://github.com/alexmnv03/java-core/tree/develop/collection-framework/Docker-component.png)
+![Docker component](https://github.com/alexmnv03/java-core/tree/develop/collection-framework/Docker-component.png)
 Client - это Docker CLI, то с чем работаем мы, она предназначена для управления самим докером 
 (Docker Daemon)
 Docker Daemon - создает (или скачивает) образы из которых он запускает контейнеры
